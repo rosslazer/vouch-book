@@ -40,7 +40,7 @@ jobs:
 
       - name: Run pipeline
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.VOUCH_BOOK_PAT }}
         run: |
           nu ./refresh_vouch_book.nu \
             --max-pages ${{ inputs.max_pages || 10 }} \
