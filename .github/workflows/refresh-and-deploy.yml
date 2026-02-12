@@ -1,0 +1,85 @@
+name: Refresh & Deploy Vouch Book
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # daily at 6am UTC
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      max_pages:
+        description: "Max pages of code search results"
+        required: false
+        default: "10"
+      per_page:
+        description: "Results per page"
+        required: false
+        default: "100"
+
+concurrency:
+  group: vouch-book-refresh
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nushell
+        uses: hustcer/setup-nu@v3
+        with:
+          version: "0.110.0"
+
+      - name: Run pipeline
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          nu ./refresh_vouch_book.nu \
+            --max-pages ${{ inputs.max_pages || 10 }} \
+            --per-page ${{ inputs.per_page || 100 }}
+
+      - name: Validate output
+        run: |
+          if [ ! -s site/data/vouch_book.json ]; then
+            echo "::error::site/data/vouch_book.json is missing or empty"
+            exit 1
+          fi
+          echo "vouch_book.json is $(wc -c < site/data/vouch_book.json) bytes"
+
+      - name: Upload intermediate CSVs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-csvs
+          retention-days: 14
+          path: |
+            vouch_repos.csv
+            vouch_repo_stats.csv
+            vouch_repo_users.csv
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/
+
+  deploy:
+    needs: refresh
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

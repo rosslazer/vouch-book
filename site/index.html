@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vouch Book</title>
+    <meta name="description" content="A static view of cross-repo reputation from VOUCHED.td files." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="background-glow glow-a"></div>
+    <div class="background-glow glow-b"></div>
+    <main class="page">
+      <header class="hero">
+        <p class="eyebrow">Vouch Book</p>
+        <h1>Cross-Repo Reputation From <code>VOUCHED.td</code></h1>
+        <p class="subtitle">
+          Static reputation index built from GitHub vouch files. Scores combine number of vouches and repo star weight.
+        </p>
+      </header>
+
+      <section class="metrics" id="metrics"></section>
+
+      <section class="controls">
+        <label>
+          Search user
+          <input id="searchInput" type="search" placeholder="username..." />
+        </label>
+        <label>
+          Sort by
+          <select id="sortSelect">
+            <option value="score">Score</option>
+            <option value="active_repo_count">Active repos</option>
+            <option value="stars_total">Weighted stars</option>
+            <option value="user">Username</option>
+          </select>
+        </label>
+        <label>
+          Min active repos
+          <input id="minReposInput" type="number" min="0" step="1" value="0" />
+        </label>
+      </section>
+
+      <section class="layout">
+        <div class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>User</th>
+                <th>Score</th>
+                <th>Active Repos</th>
+                <th>Denounced</th>
+                <th>Weighted Stars</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboardBody"></tbody>
+          </table>
+        </div>
+        <aside class="panel detail-panel" id="detailPanel">
+          <p class="detail-empty">Select a user to inspect vouch sources.</p>
+        </aside>
+      </section>
+    </main>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>

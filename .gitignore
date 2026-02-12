@@ -1,0 +1,10 @@
+.env
+.env.*
+push_repos.csv
+vouch_repos.csv
+vouch_repo_stats.csv
+vouch_repo_stats.errors.csv
+vouch_repo_users.csv
+vouch_repo_users_active.csv
+vouch_repo_stats_active.csv
+site/data/vouch_book.json
