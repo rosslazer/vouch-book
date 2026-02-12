@@ -165,6 +165,7 @@ body {
   gap: 5px;
   font-size: 0.84rem;
   color: var(--muted);
+  flex: none;
 }
 
 .controls input,
@@ -175,15 +176,7 @@ body {
   border-radius: 10px;
   padding: 9px 10px;
   font-family: inherit;
-  width: auto;
-}
-
-.controls input[type="search"] {
-  width: 180px;
-}
-
-.controls input[type="number"] {
-  width: 80px;
+  font-size: 0.84rem;
 }
 
 .layout {
