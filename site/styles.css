@@ -75,6 +75,31 @@ body {
   margin: 0;
 }
 
+.subtitle a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.subtitle a:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  margin-top: 24px;
+  padding: 12px 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.footer a {
+  color: var(--accent-2);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
 .metrics {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -147,17 +172,17 @@ table {
 
 thead th {
   text-align: left;
-  padding: 10px;
+  padding: 7px 10px;
   border-bottom: 1px solid var(--line);
   background: #fff7eb;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: var(--muted);
 }
 
 tbody td {
-  padding: 10px;
+  padding: 6px 10px;
   border-bottom: 1px solid #ede7dd;
-  font-size: 0.86rem;
+  font-size: 0.82rem;
 }
 
 tbody tr {
@@ -213,6 +238,9 @@ tbody tr.is-selected {
 .detail-empty {
   color: var(--muted);
   margin: 0;
+  font-size: 0.84rem;
+  padding: 20px 0;
+  text-align: center;
 }
 
 .repo-list {
