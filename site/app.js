@@ -206,11 +206,8 @@ function renderDetail() {
 
 function formatDate(iso) {
   try {
-    return new Date(iso).toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    });
+    const d = new Date(iso);
+    return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
   } catch {
     return iso;
   }

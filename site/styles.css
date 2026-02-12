@@ -127,7 +127,7 @@ body {
 
 .metrics {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 10px;
   margin-top: 20px;
 }
@@ -148,7 +148,8 @@ body {
 
 .metric-value {
   font-family: "Fraunces", serif;
-  font-size: 1.55rem;
+  font-size: 1.4rem;
+  white-space: nowrap;
 }
 
 .controls {
