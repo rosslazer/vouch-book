@@ -22,7 +22,8 @@
         <h1>Cross-Repo Reputation From <code>VOUCHED.td</code></h1>
         <p class="subtitle">
           A reputation index built from <a href="https://github.com/mitchellh/vouch" target="_blank" rel="noreferrer">Mitchell Hashimoto's Vouch</a> trust files across GitHub.
-          Scores combine number of vouches weighted by repo stars.
+          Each vouch is weighted by the repo's star count — more stars means more weight.
+          Denouncements count against you at 60% weight.
         </p>
       </header>
 
@@ -55,7 +56,7 @@
               <tr>
                 <th>#</th>
                 <th>User</th>
-                <th>Score</th>
+                <th title="ln(stars + 1) + 1 per vouch, minus 60% for denouncements">Score</th>
                 <th>Active Repos</th>
                 <th>Denounced</th>
                 <th>Weighted Stars</th>
