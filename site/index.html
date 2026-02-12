@@ -22,8 +22,6 @@
         <h1>Cross-Repo Reputation From <code>VOUCHED.td</code></h1>
         <p class="subtitle">
           A reputation index built from <a href="https://github.com/mitchellh/vouch" target="_blank" rel="noreferrer">Mitchell Hashimoto's Vouch</a> trust files across GitHub.
-          Each vouch is weighted by the repo's star count — more stars means more weight.
-          Denouncements count against you at 60% weight.
         </p>
       </header>
 
@@ -69,6 +67,22 @@
           <p class="detail-empty">Select a user to inspect vouch sources.</p>
         </aside>
       </section>
+
+      <details class="scoring">
+        <summary>How scoring works</summary>
+        <p>
+          Each vouch in a <code>VOUCHED.td</code> file contributes a weight based on the repo's star count:
+          <code>ln(stars + 1) + 1</code>.
+          A vouch from a 0-star repo is worth ~1.0; from a 1,000-star repo, ~7.9; from a 50k-star repo like Ghostty, ~11.8.
+        </p>
+        <p>
+          Denouncements (prefixed with <code>-</code>) subtract at 60% of that weight.
+        </p>
+        <p>
+          A user's total score is the sum of all vouch weights minus all denouncement weights.
+          The same user can appear in multiple repos — each one counts independently.
+        </p>
+      </details>
 
       <footer class="footer">
         Data refreshed daily from public GitHub repos.

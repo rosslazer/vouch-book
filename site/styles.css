@@ -84,6 +84,31 @@ body {
   text-decoration: underline;
 }
 
+.scoring {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-top: 18px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.scoring summary {
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.scoring code {
+  background: #f0ebe2;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.76rem;
+}
+
 .footer {
   margin-top: 24px;
   padding: 12px 0;
@@ -127,8 +152,8 @@ body {
 }
 
 .controls {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-top: 18px;
 }
@@ -149,6 +174,15 @@ body {
   border-radius: 10px;
   padding: 9px 10px;
   font-family: inherit;
+  width: auto;
+}
+
+.controls input[type="search"] {
+  width: 180px;
+}
+
+.controls input[type="number"] {
+  width: 80px;
 }
 
 .layout {
