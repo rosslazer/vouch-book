@@ -60,7 +60,7 @@ function render() {
 function renderMetrics() {
   const d = state.data;
   const items = [
-    ["Generated", d.generated_at],
+    ["Updated", formatDate(d.generated_at)],
     ["Repos", d.totals.repos.toLocaleString()],
     ["Users", d.totals.unique_users.toLocaleString()],
     ["Active Vouches", d.totals.active_edges.toLocaleString()],
@@ -134,9 +134,7 @@ function renderTable() {
       return `
         <tr class="${selectedClass}" data-key="${escapeHtml(u.user_key)}">
           <td>${idx + 1}</td>
-          <td><span class="pill">${escapeHtml(u.platform)}</span> ${escapeHtml(
-            u.user
-          )}</td>
+          <td>${escapeHtml(u.user)}</td>
           <td class="score">${u.score.toFixed(2)}</td>
           <td>${u.active_repo_count}</td>
           <td class="${u.denounced_repo_count > 0 ? "denounced" : ""}">${
@@ -204,6 +202,18 @@ function renderDetail() {
         .join("")}
     </ul>
   `;
+}
+
+function formatDate(iso) {
+  try {
+    return new Date(iso).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  } catch {
+    return iso;
+  }
 }
 
 function escapeHtml(s) {
